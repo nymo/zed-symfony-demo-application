@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Symfony Zed demo{% endblock %}
+
+{% block body %}
+    <h1>{{ 'home.title'|trans }}</h1>
+    {% include 'partials/greeting.html.twig' with { greeting: hello } %}
+    <p><a href="{{ path('hello_world', { name: 'Zed' }) }}">Open the parameterized route</a></p>
+    <p><a href="{{ helloUrl }}">Generated from the controller</a></p>
+    <p><a href="{{ path('attribute_show', { id: 42 }) }}">Open the attribute route</a></p>
+{% endblock %}

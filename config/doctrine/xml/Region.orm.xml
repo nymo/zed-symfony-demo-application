@@ -1,0 +1,6 @@
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+  <entity name="App\Geography\Entity\Region" table="geography_region">
+    <id name="id" type="integer" />
+    <field name="code" type="string" column="region_code" />
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,3 @@
+home.title: 'Symfony Zed demo'
+home.subtitle: 'Routes, templates, translations, and services'
+hello.title: 'Hello %name%'

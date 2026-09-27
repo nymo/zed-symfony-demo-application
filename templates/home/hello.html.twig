@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello {{ name }}{% endblock %}
+
+{# LSP fixture: {{ 'hello.title'|trans({'%name%': name}) }} #}
+{% block body %}
+    <h1>Hello {{ name }}</h1>
+    {% include 'partials/greeting.html.twig' with { greeting: hello } %}
+    <p><a href="{{ path('home') }}">Back home</a></p>
+{% endblock %}

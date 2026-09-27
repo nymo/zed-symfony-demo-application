@@ -1,0 +1,10 @@
+App\Catalog\Entity\Label:
+  type: entity
+  table: catalog_label
+  fields:
+    id:
+      type: integer
+      id: true
+    label:
+      type: string
+      column: label_text

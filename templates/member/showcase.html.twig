@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ member_label(member)|member_slug }}</h1>
+
+    {% if member is member_active %}
+        {% notice %}
+            <twig:member_badge label="Active member" variant="success" />
+        {% endnotice %}
+    {% endif %}
+
+    {{ form_widget(form.email) }}
+    {{ component('member_badge', { label: 'From component()' }) }}
+{% endblock %}

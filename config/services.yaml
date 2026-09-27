@@ -1,15 +1,19 @@
 # This file is the entry point to configure your own services.
-# Files in the packages/ subdirectory configure your dependencies.
+# The imported files are static fixtures for testing XML and PHP DI indexing.
+imports:
+    - { resource: examples/services.xml }
+    - { resource: examples/services.php }
 
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
-parameters:
 
 services:
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
-        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        autoconfigure: true # Automatically registers services with common tags.
+        bind:
+            string $applicationName: 'Symfony Zed Demo'
 
     # makes classes in src/ available to be used as services
     # this creates a service per class whose id is the fully-qualified class name
@@ -17,8 +21,27 @@ services:
         resource: '../src/'
         exclude:
             - '../src/DependencyInjection/'
-            - '../src/Entity/'
+            - '../src/Member/Entity/'
+            - '../src/Catalog/Entity/'
+            - '../src/Geography/Entity/'
             - '../src/Kernel.php'
+
+    # Controllers are registered explicitly so their service wiring is visible here.
+    App\Controller\HomeController:
+        arguments:
+          - '@hello.world.generator'
+        tags: ['controller.service_arguments']
+
+    # Deliberately missing controller.service_arguments: Phase 5 suggests adding it.
+    App\Controller\AttributeRouteController:
+        autowire: true
+
+    hello.world.generator:
+        class: 'App\HelloWorld\Generator'
+        tags: ['app.greeting_generator']
+
+    App\HelloWorld\GeneratorAlias:
+        alias: hello.world.generator
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
